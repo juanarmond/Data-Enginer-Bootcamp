@@ -61,7 +61,7 @@ jobs:
       # Install Test Dependencies
       - name: Install test dependencies
         run: |
-          pip install -r test/requirements.txt
+          pip install -r tests/requirements.txt
 
       # Deploy
       - name: Run test
