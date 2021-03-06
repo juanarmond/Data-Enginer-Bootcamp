@@ -15,7 +15,7 @@ def create_stack(stack_name, template_body, **kwards):
         TemplateBody = template_body,
         Capabilities = ['CAPABILITY_IAM','CAPABILITY_NAMED_IAM'],
         TimeoutInMinutes = 30,
-        onFailure = 'ROLLBACK'
+        OnFailure = 'ROLLBACK'
     )
 
     cloudformation_client.get_waiter('stack_create_complete').wait(
