@@ -60,7 +60,7 @@ def _get_abs_path(path):
 
 
 def create_or_update_stack():
-    stack_name = 's3-bucket-first-cicd'
+    stack_name = 's3-bucket-juanarmond-first-cicd'
     with open(_get_abs_path('bucket_github_actions.yaml')) as f:
         template_body = f.read()
 
