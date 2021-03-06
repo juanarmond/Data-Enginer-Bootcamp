@@ -1,4 +1,4 @@
-# It has a practical focus on skills development and the use of tools to create data pipelines that meet the needs of different organizations.
+# This course has a practical focus on development skills and the learn how to use the tools to create data pipelines that meet the needs of different organizations.
 All projects will be developed and implemented in the cloud (AWS).
 
 Knowledge gained
