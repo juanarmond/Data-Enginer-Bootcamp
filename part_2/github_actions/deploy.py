@@ -24,6 +24,7 @@ def create_stack(stack_name, template_body, **kwargs):
     cloudformation_client.get_waiter('stack_exists').wait(StackName=stack_name)
     logging.info(f'CREATE COMPLETE')
 
+
 def update_stack(stack_name, template_body, **kwargs):
     try:
         cloudformation_client.update_stack(
@@ -59,8 +60,8 @@ def _get_abs_path(path):
 
 
 def create_or_update_stack():
-    stack_name = 's3-bucket-ci'
-    with open(_get_abs_path('bucket_github_actions.yaml')) as f:
+    stack_name = 's3-bucket-first-cicd'
+    with open(_get_abs_path('s3_bucket.yml')) as f:
         template_body = f.read()
 
     existing_stacks = get_existing_stacks()
