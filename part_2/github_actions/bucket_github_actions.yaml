@@ -2,7 +2,7 @@ Description: Create S3 Butcket
 
 Resources:
   BucketJuanArmondS3:
-    Type: AWS::S3:Bucket
+    Type: AWS::S3::Bucket
     Properties:
       BucketName: bucket-juanarmond-github-actions
       BucketEncryption:
