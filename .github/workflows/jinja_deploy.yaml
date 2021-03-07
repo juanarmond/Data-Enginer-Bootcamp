@@ -1,4 +1,4 @@
-name: Deploy S3 Bucket using jinga and workflow
+name: Deploy using jinga and workflow
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      -name: Install Dependencies
+      - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requeriments.txt
