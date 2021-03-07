@@ -77,22 +77,22 @@ def create_or_update_stack():
         create_stack(stack_name, template_body)
 
 
-def renderiza_template():
+def renderize_template():
     logging.info(f'RENDERING JINJA')
     with open(_get_abs_path('redshift.yaml.j2'), 'r') as f:
         redshift_yaml = f.read()
 
     with open(_get_abs_path('config.yaml'), 'r') as f:
-        config = yaml.safe_load(f)
+        config = f.read()
 
     redshift_template = jinja2.Template(redshift_yaml)
     redshift_rendered = redshift_template.render({**config, **os.environ})
 
-    with open(_get_abs_path('redshift.yaml'), 'w') as f:
+    with open('redshift.yaml', 'w') as f:
         f.write(redshift_rendered)
     logging.info(f'JINJA RENDERED')
 
 
 if __name__ == '__main__':
-    renderiza_template()
+    renderize_template()
     create_or_update_stack()
