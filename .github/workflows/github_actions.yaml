@@ -41,3 +41,4 @@ jobs:
             AWS_DEFAULT_REGION: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           python part_2/github_actions/deploy.py
+
