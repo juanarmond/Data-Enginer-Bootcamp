@@ -9,8 +9,8 @@ environments:
 
 redshiftCluster:
   dbName: app
-  nodeType: dc2.larger
+  nodeType: dc2.large
   numberOfNodes: 2
   securityGroup:
-    whiteListedIps:
+    whitelistedIps:
       - 35.190.215.9/32
