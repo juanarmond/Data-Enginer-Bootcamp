@@ -68,6 +68,7 @@ Resources:
           ToPort: 5439
       SecurityGroupIngress:
       {% for ip in redshiftCluster.securityGroup.whitelistedIps %}
+      {print(ip)}
         - CidrIp: {{ ip }}
           FromPort: 5439
           IpProtocol: tcp
