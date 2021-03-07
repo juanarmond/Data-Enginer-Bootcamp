@@ -1,9 +1,10 @@
 import boto3
 import logging
-
-import jinja2
 from botocore.exceptions import ClientError
+import jinja2
+import yaml
 import os
+
 
 logging.getLogger().setLevel(logging.INFO)
 cloudformation_client = boto3.client('cloudformation')
@@ -62,8 +63,8 @@ def _get_abs_path(path):
 
 
 def create_or_update_stack():
-    stack_name = 's3-bucket-juanarmond-first-cicd'
-    with open(_get_abs_path('bucket_github_actions.yaml')) as f:
+    stack_name = f'redshift-{os.environ["ENVIRONMENT"]}'
+    with open(_get_abs_path('redshift.yaml')) as f:
         template_body = f.read()
 
     existing_stacks = get_existing_stacks()
@@ -76,22 +77,23 @@ def create_or_update_stack():
         create_stack(stack_name, template_body)
 
 
-def renderize_template():
+def renderiza_template():
     logging.info(f'RENDERING JINJA')
     with open(_get_abs_path('redshift.yaml.j2'), 'r') as f:
         redshift_yaml = f.read()
 
     with open(_get_abs_path('config.yaml'), 'r') as f:
-        config = f.read()
+        config = yaml.safe_load(f)
+
 
     redshift_template = jinja2.Template(redshift_yaml)
     redshift_rendered = redshift_template.render({**config, **os.environ})
 
-    with open('redshift.yaml', 'w') as f:
+    with open(_get_abs_path('redshift.yaml'), 'w') as f:
         f.write(redshift_rendered)
     logging.info(f'JINJA RENDERED')
 
 
 if __name__ == '__main__':
-    renderize_template()
+    renderiza_template()
     create_or_update_stack()
