@@ -1,0 +1,40 @@
+name: Deploy S3 Bucket using jinga and workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: action/checkout@v2
+
+      - name: Setup Python
+        uses: action/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      -name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requeriments.txt
+          pip install -r tests/requirements.txt
+
+      - name: Run Tests
+        run: python -m pytest
+
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          redshiftClusterMasterUsername: ${{ secrets.redshiftClusterMasterUsername }}
+          redshiftClusterMasterUserPassword: ${{ secrets.redshiftClusterMasterUserPassword }}
+          ENVIRONMENT: production
+        run: |
+          python part_2/jinja/deploy.py
+
+
