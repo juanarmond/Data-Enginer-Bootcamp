@@ -85,7 +85,6 @@ def renderiza_template():
     with open(_get_abs_path('config.yaml'), 'r') as f:
         config = yaml.safe_load(f)
 
-
     redshift_template = jinja2.Template(redshift_yaml)
     redshift_rendered = redshift_template.render({**config, **os.environ})
 
